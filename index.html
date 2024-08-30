@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Glygh</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,800&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100dvh;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        div.body {
+            aspect-ratio: 1/1;
+            height: 90dvh;
+            background-color: black;
+            padding: 20px;
+        }
+
+        .header {
+            width: 100%;
+            height: 10%;
+            border: 1px solid white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            h1 {
+                font-family: 'Kanit', sans-serif;
+                font-weight: 500;
+                font-style: normal;
+                display: flex;
+                align-items: center;
+            }
+
+            text {
+                font-family: 'Kanit', sans-serif;
+                font-weight: 200;
+                font-style: normal;
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-family: 'Kanit', sans-serif;
+                font-weight: 600;
+                font-style: normal;
+                font-size: 1.5rem;
+            }
+        }
+
+        .icons {
+            font-size: 2rem;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 75%;
+            border: 1px solid white;
+
+            h1 {
+                font-family: 'Nunito Sans', sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                font-size: 7rem;
+                color: black;
+                background-color: white;
+                height: 90%;
+                border-radius: 100%;
+                aspect-ratio: 1/1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <div class="header">
+            <h1> <span class="material-symbols-outlined icons"> token </span> &nbsp; Glygh </h1>
+            <p id="date">30.Aug.24</p>
+            <text>Gen V1</text>
+        </div>
+        <hr>
+        <div class="main">
+            <h1 id="mainNumber">45</h1>
+        </div>
+        <hr>
+        <div class="header">
+            <h1> <span class="material-symbols-outlined icons"> deployed_code </span> &nbsp; theatom06 </h1>
+            <p id="hexCode">3DF4 6G 5DF8</p>
+        </div>
+    </div>
+
+    <script defer>
+        const h1 = document.querySelector('h1#mainNumber');
+        const stringOfall = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        function randomString(length) {
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += stringOfall.charAt(Math.floor(Math.random() * stringOfall.length));
+            }
+            return result;
+        }
+
+        h1.innerHTML = randomString(2);
+
+        const date = document.querySelector('p#date');
+        const d = new Date();
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        date.innerHTML = `${d.getDate()}.${months[d.getMonth()]}.${d.getFullYear().toString().slice(2)}`;
+
+        const hexCode = document.querySelector('p#hexCode');
+        hexCode.innerHTML = Date.now().toString(16).toUpperCase().substring(0, 4) + ' ' + h1.innerHTML + ' ' + (Math
+            .random() * 1000).toString(16).toUpperCase().substring(4, 8);
+
+
+        document.querySelector('.body').addEventListener('click', () => {
+            html2canvas(document.querySelector('.body')).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL();
+                link.download = 'image.png';
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>
